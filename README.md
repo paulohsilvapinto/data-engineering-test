@@ -40,7 +40,8 @@ v.get_compatible_venues(user_list=['Karol Drewno', 'Wen Li']
 And the output will be:
 
 ```json
-{"places_to_visit": [
+{
+    "places_to_visit": [
         "Spice of life",
         "The Cambridge",
         "Spirit House"
