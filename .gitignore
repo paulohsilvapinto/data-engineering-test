@@ -1,0 +1,7 @@
+*.cfg
+.vscode
+Scripts/
+Include/
+Lib/
+*/__pycache__/
+*.egg-info/
