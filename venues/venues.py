@@ -1,12 +1,13 @@
 import requests
 import json
-from typing import List, Dict
+from typing import List, Dict, TypeVar, Any
 
+T = TypeVar('T', str, List[str])
 DEFAULT_USERS_URL = 'https://gist.githubusercontent.com/benjambles/ea36b76bc5d8ff09a51def54f6ebd0cb/raw/ee1d0c16eaf373cccadd3d5604a1e0ea307b2ca0/users.json'
 DEFAULT_VENUES_URL = 'https://gist.githubusercontent.com/benjambles/ea36b76bc5d8ff09a51def54f6ebd0cb/raw/ee1d0c16eaf373cccadd3d5604a1e0ea307b2ca0/venues.json'
 
 
-def _get_json_from_url(url: str):
+def _get_json_from_url(url: str) -> List[Dict[str, T]]:
     try:
         response = json.loads(requests.get(url).text)
     except Exception as e:
@@ -15,12 +16,12 @@ def _get_json_from_url(url: str):
     return response
 
 
-def _normalize_string(x: str):
+def _normalize_string(x: str) -> str:
     return x.lower().strip()
 
 
 # Converts user name to dict key and normalizes user preferences
-def parse_json_users(users_response: List[Dict]):
+def parse_json_users(users_response: List[Dict[str, T]]) -> Dict[str, Dict[str, T]]:
     users = {}
     for user in users_response:
         users[user['name']] = {
@@ -31,7 +32,7 @@ def parse_json_users(users_response: List[Dict]):
 
 
 # Converts venues name to dict key and normalizes venues menu
-def parse_json_venues(venues_response: List[Dict]):
+def parse_json_venues(venues_response: List[Dict[str, T]]) -> Dict[str, Dict[str, T]]:
     venues = {}
     for venue in venues_response:
         venues[venue['name']] = {
@@ -42,7 +43,7 @@ def parse_json_venues(venues_response: List[Dict]):
 
 
 # Selects only preferences of the selected users
-def filter_users(user_list: List[str], users: Dict):
+def filter_users(user_list: List[str], users: Dict[str, Dict[str, T]]) -> Dict[str, Dict[str, T]]:
     filtered_users = {}
     for user in user_list:
         try:
@@ -54,28 +55,28 @@ def filter_users(user_list: List[str], users: Dict):
     return filtered_users
 
 
-def check_user_list(user_list: List[str]):
+def check_user_list(user_list: List[str]) -> List[str]:
     if isinstance(user_list, list):
         return user_list
     elif isinstance(user_list, str):
         return list(user_list)
     else:
-        raise TypeError('A user list with user names was expected as input.')
+        raise TypeError('A user list containing user names was expected as input.')
 
 
-def _is_valid_food_menu(food_menu: List[str], food_restrictions: List[str]):
+def _is_valid_food_menu(food_menu: List[str], food_restrictions: List[str]) -> bool:
     if set(food_menu).difference(set(food_restrictions)):
         return True
     return False
 
 
-def _is_valid_drink_menu(drink_menu: List[str], drinks_approved: List[str]):
+def _is_valid_drink_menu(drink_menu: List[str], drinks_approved: List[str]) -> bool:
     if set(drink_menu).intersection(set(drinks_approved)):
         return True
     return False
 
 
-def check_venues(users: Dict, venues: Dict):
+def check_venues(users: Dict[str, Dict[str, T]], venues: Dict[str, Dict[str, T]]) -> Dict[str, Any]:
     places_to_visit = []
     places_to_avoid = []
 
@@ -113,7 +114,7 @@ def check_venues(users: Dict, venues: Dict):
 
 def get_compatible_venues(user_list: List[str],
                           users_url: str = DEFAULT_USERS_URL,
-                          venues_url: str = DEFAULT_VENUES_URL):
+                          venues_url: str = DEFAULT_VENUES_URL) -> Dict[str, Any]:
     user_list = check_user_list(user_list)
     users = parse_json_users(_get_json_from_url(users_url))
     venues = parse_json_venues(_get_json_from_url(venues_url))
