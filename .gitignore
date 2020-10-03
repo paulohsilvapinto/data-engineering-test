@@ -3,5 +3,8 @@
 Scripts/
 Include/
 Lib/
-*/__pycache__/
+
+__pycache__/
+
+*.egg
 *.egg-info/
