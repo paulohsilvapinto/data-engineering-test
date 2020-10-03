@@ -1,4 +1,6 @@
-# Venues Validator
+# Venues Validator (Python test) and SQL test
+
+## Part 1 - Python test
 
 ### Main Goal
 
@@ -71,5 +73,11 @@ And the output will be:
     ]
 }
 ```
+
+## Part 2 - SQL test
+
+The total revenue is 4,390. You can find the SQL query [here.](/sql_task/sql_task_script.sql)
+
+![Answer Evidence](/sql_task/question1_answer.jpg)
 
 **I hope you like it! :heart:**
