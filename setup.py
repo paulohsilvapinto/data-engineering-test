@@ -10,7 +10,7 @@ setup(
    license="MIT",
    author='Paulo Henrique',
    author_email='paulohsilvapinto@gmail.com',
-   url="http://www.foopackage.com/",
+   url="https://github.com/paulohsilvapinto/timeout-test",
    packages=['venues'],
    install_requires=requirements
 )
