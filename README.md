@@ -36,7 +36,7 @@ If no users_url is provided, then the function will use [this file](https://gist
 Therefore, a sample call would be:
 
 ```python
-v.get_compatible_venues(user_list=['Karol Drewno', 'Wen Li']
+v.get_compatible_venues(user_list=['Karol Drewno', 'Wen Li'])
 ```
 
 And the output will be:
