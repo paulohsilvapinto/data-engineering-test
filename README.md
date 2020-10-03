@@ -39,7 +39,7 @@ Therefore, a sample call would be:
 v.get_compatible_venues(user_list=['Karol Drewno', 'Wen Li']
 ```
 
-And the output will be:
+And the output would be:
 
 ```json
 {
@@ -79,6 +79,6 @@ And the output will be:
 
 The total revenue is 4,390. You can find the SQL query [here.](/sql_task/sql_task_script.sql)
 
-![Answer Evidence](/sql_task/question1_answer.jpg)
+![Answer Evidence](/sql_task/question1_answer.JPG)
 
 **I hope you like it! :heart:**
