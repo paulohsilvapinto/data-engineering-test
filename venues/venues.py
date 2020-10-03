@@ -92,6 +92,7 @@ def filter_users(user_list: List[str],
 
 
 def check_user_list(user_list: T) -> List[str]:
+    # Checks if is a list of strings
     if isinstance(user_list, list) and all(
             isinstance(user, str) for user in user_list):
         return user_list
